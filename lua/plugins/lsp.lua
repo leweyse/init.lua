@@ -39,6 +39,7 @@ return {
         ["ts_ls"] = function ()
           local lspconfig = require("lspconfig")
           lspconfig.ts_ls.setup({
+            -- improve perfomance for `tsserver`
             root_dir = require('lspconfig.util').root_pattern('.git'),
             capabilities = capabilities,
             on_init = function(client)

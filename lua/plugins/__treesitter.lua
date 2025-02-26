@@ -5,7 +5,7 @@ local M = {
     local configs = require("nvim-treesitter.configs")
 
     configs.setup({
-      ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "heex", "javascript", "typescript", "html" },
+      ensure_installed = { "c", "rust", "lua", "vim", "vimdoc", "query", "heex", "javascript", "typescript", "html" },
 
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,

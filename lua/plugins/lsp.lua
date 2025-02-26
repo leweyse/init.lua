@@ -39,6 +39,7 @@ return {
         ["ts_ls"] = function ()
           local lspconfig = require("lspconfig")
           lspconfig.ts_ls.setup({
+            root_dir = require('lspconfig.util').root_pattern('.git'),
             capabilities = capabilities,
             on_init = function(client)
               client.server_capabilities.semanticTokensProvider = nil
@@ -86,21 +87,6 @@ return {
             filetypes = { 'glsl', 'vs', 'fs', 'vert', 'frag' },
           })
         end,
-
-        tailwindcss = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.tailwindcss.setup({
-            settings = {
-              tailwindCSS = {
-                experimental = {
-                  classRegex = {
-                    { "([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"},
-                  },
-                },
-              },
-            }
-          })
-        end,
       }
     })
 
@@ -117,22 +103,9 @@ return {
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<Tab>"] = cmp.mapping(function(fallback)
-          if require("copilot.suggestion").is_visible() then
-            require("copilot.suggestion").accept()
-          elseif cmp.visible() then
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          else
-            fallback()
-          end
-        end, {
-            "i",
-            "s",
-          }),
       }),
       sources = cmp.config.sources({
-        {name = 'copilot'},
-        {name = 'path'},
+        { name = 'path' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' }, -- For luasnip users.
       }, {

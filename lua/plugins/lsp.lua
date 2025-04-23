@@ -25,7 +25,8 @@ return {
     require("fidget").setup({})
     require("mason").setup()
     require("mason-lspconfig").setup({
-      ensure_installed = {'ts_ls', 'lua_ls', 'rust_analyzer', 'tailwindcss', 'eslint', 'astro', 'marksman', 'glsl_analyzer', 'biome'},
+      ensure_installed = {'ts_ls', 'lua_ls', 'rust_analyzer', 'tailwindcss', 'astro', 'marksman', 'glsl_analyzer'},
+
       handlers = {
         function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup({
